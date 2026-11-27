@@ -167,6 +167,7 @@ footer{background:var(--navy);color:#CFE6F7;font-size:14px;padding:18px max(5vw,
 @media(max-width:1020px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:820px){.top,.ho,.vids{grid-template-columns:minmax(0,1fr)}.scene{max-width:440px;margin:0 auto}.pass{grid-template-columns:minmax(0,1fr)}.stub{border-left:0;border-top:3px dashed var(--line)}.stub::before{left:-17px;top:-17px}.stub::after{left:auto;right:-17px;top:-17px;bottom:auto}.three{grid-template-columns:minmax(0,1fr)}.actions{grid-template-columns:minmax(0,1fr)}.cta{justify-self:start;white-space:normal}}
 @media(max-width:600px){.top{display:flex;flex-direction:column-reverse}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.art .pp{width:100px;height:100px}.art{height:108px}.route{grid-template-columns:minmax(0,1fr)}.route .to{text-align:left}.fly{transform:rotate(90deg);margin:0 auto}.dood{display:none}}
+.four{grid-template-columns:repeat(4,minmax(0,1fr))}.note{margin:22px 0 0;align-items:flex-start;line-height:1.5}.note b{color:var(--red)}@media(max-width:1020px){.three.four{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.three.four{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:no-preference){.pass.swap{animation:issue .35s ease-out}@keyframes issue{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}}
 @media(prefers-reduced-motion:reduce){.card,.card:hover{transition:none;transform:none}}
 </style>
@@ -245,7 +246,8 @@ footer{background:var(--navy);color:#CFE6F7;font-size:14px;padding:18px max(5vw,
   <div class="in">
     <h2 data-t="feelH"></h2>
     <p class="lede" data-t="feelL"></p>
-    <div class="three" id="moments"></div>
+    <div class="three four" id="moments"></div>
+    <p class="tip note" id="teamNote"></p>
   </div>
 </section>
 
@@ -373,7 +375,7 @@ if (typeof module !== 'undefined') module.exports = KIT;
     [{ hairStyle: 'bun', skin: 2, hair: '#2E1F1A', shirt: '#FFB36B', shirtD: '#F08F3A', eyes: 'wink', mouth: 'open' }, 'swap']
   ];
   const RULEP = [[{ hairStyle: 'swoop', glasses: true, shirt: '#22306E', shirtD: '#1B2466', mouth: 'small' }, 'check'], [{ hairStyle: 'long', skin: 1, hair: '#2E1F1A', eyes: 'calm' }, 'team'], [{ hairStyle: 'crew', skin: 2, hair: '#1F1A1A', shirt: '#9CC3F0', shirtD: '#7FA9E0', mouth: 'open' }, 'swap']];
-  const MOMP = [[{ hairStyle: 'bob', hair: '#4A2D22', mouth: 'open' }, 'cal'], [{ hairStyle: 'swoop', skin: 1, shirt: '#2BB673', shirtD: '#1E9A5E', eyes: 'closed' }, 'bag'], [{ hairStyle: 'bun', skin: 1, hair: '#2E1F1A', eyes: 'closed', mouth: 'open' }, 'heart']];
+  const MOMP = [[{ hairStyle: 'long', skin: 1, hair: '#2E1F1A', shirt: '#22306E', shirtD: '#1B2466', mouth: 'open' }, 'mail'], [{ hairStyle: 'bob', hair: '#4A2D22', mouth: 'open' }, 'cal'], [{ hairStyle: 'swoop', skin: 1, shirt: '#2BB673', shirtD: '#1E9A5E', eyes: 'closed' }, 'bag'], [{ hairStyle: 'bun', skin: 1, hair: '#2E1F1A', eyes: 'closed', mouth: 'open' }, 'heart']];
   const OV = 'Is this position available for overlap?', FP = 'Filled Positions Available for Overlap';
   const L = {
     en: { watchSP: 'Watch on SharePoint', deckDl: 'Download the deck (PowerPoint)', soon: 'Video coming soon', sopT: 'SOP: Change Job', sopS: 'Who does what, timeline, templates, checklist', sop2T: 'SOP: Handover with job overlap', sop2S: 'Full steps for a handover', name: 'EN', h1a: "Someone's moving?", h1b: "Let's make it smooth", pill: 'Pick their move. Get the right template and 3 checks.',
@@ -381,15 +383,15 @@ if (typeof module !== 'undefined') module.exports = KIT;
       lines: ['Bigger role, new grade.', 'New manager or team.', 'New site or city.', 'New title, same seat.', 'Someone new takes over.'],
       boarding: 'Boarding pass', today: 'Today', next: 'Next', useTpl: 'Use this template', beforeSubmit: 'Before you submit', sample: 'Names and roles are samples.',
       subs: ['Approve it outside Workday first.', 'New manager or team. Same pay.', 'Pay changing? "with Compensation Change". If not, "No Change in Compensation".', 'New title or grade. Same seat, same pay.', 'The new person starts before the other one leaves.'],
-      checks: [['Approval done outside Workday', 'New Job Profile and grade', 'Pay change ready'], ['New manager already has a team', 'Pay stays the same', 'Cost Center and Branch SSF'], ['Right template for pay', 'Cost Center and Branch SSF', 'Admin knows: desk, card, parking'], ['New Job Profile', 'Pay stays the same', "Same position: don't change it"], ['Person leaving goes first', `Tick "${OV}"`, "Don't close their position"]],
+      checks: [["Approval done outside Workday", "New Job Profile and grade", "Pay change ready"], ["Open position in the new team", "Pay stays the same", "Cost Center and Branch SSF"], ["Right template for pay", "Cost Center and Branch SSF", "Admin knows: desk, card, parking"], ["New Job Profile", "Pay stays the same", "Same position: don't change it"], ["Person leaving goes first", "Tick \"Is this position available for overlap?\"", "Don't close their position"]],
       tip: 'Handover? Do the person leaving first, and tick overlap.', cta: 'Watch the 1-min video →',
-      hoH: 'Handover, side by side', hoL: 'The new person starts early and learns the job from the one leaving.', leave: 'moving on', join: 'stepping in', together: 'a few weeks together',
+      hoH: 'Handover, side by side', hoL: "The new person starts about 4 weeks early and learns the job from the one leaving. Start about 6 weeks before move day.", leave: 'moving on', join: 'stepping in', together: "4 weeks together",
       steps: [['First', `Ploy's Change Job. Tick <code>${OV}</code>`], ['Then', 'Wait until every approval is done.'], ['Last', `Nam joins. Pick the seat from <code>${FP}</code>`]],
       oops: "<b>Date error?</b> Don't rescind anything. Ping HRIS and we'll sort it out together.",
       alwaysH: 'Every move, every time', alwaysL: 'Three small things that save a lot of fixing later.',
-      rules: [['Branch SSF filled', 'Unsure? Ask your HR Partner.'], ['New team exists', 'No team yet? HRIS creates it first.'], ['Same role? Same position', 'Change the Job Profile, not the position.']],
+      rules: [["Branch SSF filled", "Unsure? Ask your HR Partner."], ["New team and position ready", "Moving to another team? It needs an open position for them before move day."], ["Same role? Same position", "Change the Job Profile, not the position."]],
       feelH: 'Make their move feel good', feelL: "The template is the easy part. These moments are what they'll remember.",
-      moments: [['A week before', 'Tell them the date. Brief Payroll, IT and Admin.'], ['Move day', 'Workday switches over by itself. Access and desk are ready.'], ['First week', "Check profile, approvals and pay. Ask how it's going."]],
+      moments: [["2–4 weeks before", "HR Partner tells IT, Admin and the SAP team, so everything is ready in time."], ["2 weeks before", "Start Change Job in Workday. Confirm the date with the employee and Payroll."], ["Move day", "Workday switches over by itself. Tools, access and desk are ready."], ["First week", "Check profile, approvals and pay. Ask how it's going."]], teamNote: "<b>HR Partner, heads-up:</b> tell IT, Admin and the SAP team 2–4 weeks before move day, depending on what's needed: laptop, email and system access, SAP roles, desk, access card, parking. Workday doesn't tell them yet.",
       helpH: 'Need a hand?', helpL: 'Short videos, or a real person.', q: 'Questions or errors', team: 'HRIS team',
       vid1T: 'Video: Change Job in 1 minute', vid1S: 'Who does what, and the flow', vidT: 'Video: Handover with job overlap', vidS: '4 minutes, step by step', artT: 'Workday Help article', artS: 'Step by step, with pictures', open: 'Open' },
     th: { watchSP: 'ดูใน SharePoint', deckDl: 'ดาวน์โหลดสไลด์ (PowerPoint)', soon: 'วิดีโอกำลังจะมา', sopT: 'SOP: Change Job', sopS: 'ใครทำอะไร ไทม์ไลน์ template และเช็กลิสต์', sop2T: 'SOP: ส่งมอบงานด้วย job overlap', sop2S: 'ขั้นตอนเต็มของการส่งมอบงาน', name: 'TH', h1a: 'มีคนกำลังย้าย?', h1b: 'มาทำให้ราบรื่นกัน', pill: 'เลือกการเปลี่ยนแปลง รับ template ที่ใช่ พร้อม 3 สิ่งที่ต้องเช็ก',
@@ -397,15 +399,15 @@ if (typeof module !== 'undefined') module.exports = KIT;
       lines: ['บทบาทใหญ่ขึ้น grade ใหม่', 'หัวหน้าหรือทีมใหม่', 'ย้ายไซต์หรือเมือง', 'ชื่อตำแหน่งใหม่ ที่เดิม', 'มีคนใหม่มารับช่วงต่อ'],
       boarding: 'บัตรขึ้นเครื่อง', today: 'ตอนนี้', next: 'ถัดไป', useTpl: 'ใช้ template นี้', beforeSubmit: 'ก่อนกด Submit', sample: 'ชื่อและตำแหน่งเป็นตัวอย่าง',
       subs: ['อนุมัตินอก Workday ก่อน', 'หัวหน้าหรือทีมใหม่ เงินเดือนเท่าเดิม', 'มีปรับเงินเดือน? ใช้ "with Compensation Change" ถ้าไม่มี ใช้ "No Change in Compensation"', 'ชื่อตำแหน่งหรือ grade ใหม่ ที่เดิม เงินเดือนเท่าเดิม', 'คนใหม่เริ่มงานก่อนคนเดิมย้ายออก'],
-      checks: [['อนุมัตินอก Workday แล้ว', 'Job Profile และ grade ใหม่', 'เตรียมการปรับเงินเดือน'], ['หัวหน้าใหม่มีทีมอยู่แล้ว', 'เงินเดือนเท่าเดิม', 'Cost Center และ Branch SSF'], ['เลือก template ให้ตรงเรื่องเงินเดือน', 'Cost Center และ Branch SSF', 'แจ้ง Admin: โต๊ะ บัตร ที่จอดรถ'], ['Job Profile ใหม่', 'เงินเดือนเท่าเดิม', 'Position เดิม ห้ามเปลี่ยน'], ['ทำของคนเดิมก่อน', `ติ๊ก "${OV}"`, 'ห้ามปิดตำแหน่งเดิม']],
+      checks: [["อนุมัตินอก Workday แล้ว", "Job Profile และ grade ใหม่", "เตรียมการปรับเงินเดือน"], ["มีตำแหน่งว่างในทีมใหม่", "เงินเดือนเท่าเดิม", "Cost Center และ Branch SSF"], ["เลือก template ให้ตรงเรื่องเงินเดือน", "Cost Center และ Branch SSF", "แจ้ง Admin: โต๊ะ บัตร ที่จอดรถ"], ["Job Profile ใหม่", "เงินเดือนเท่าเดิม", "Position เดิม ห้ามเปลี่ยน"], ["ทำของคนเดิมก่อน", "ติ๊ก \"Is this position available for overlap?\"", "ห้ามปิดตำแหน่งเดิม"]],
       tip: 'ส่งมอบงาน? ทำของคนเดิมก่อน แล้วติ๊ก overlap', cta: 'ดูวิดีโอ 1 นาที →',
-      hoH: 'ส่งมอบงาน ทำงานคู่กัน', hoL: 'คนใหม่เริ่มก่อน ได้เรียนรู้งานจากคนที่กำลังย้ายออก', leave: 'กำลังย้ายออก', join: 'เข้ามาแทน', together: 'ทำงานคู่กันไม่กี่สัปดาห์',
+      hoH: 'ส่งมอบงาน ทำงานคู่กัน', hoL: "คนใหม่เริ่มงานก่อนประมาณ 4 สัปดาห์ เพื่อเรียนรู้งานจากคนที่กำลังย้ายออก เริ่มดำเนินการประมาณ 6 สัปดาห์ก่อนวันย้าย", leave: 'กำลังย้ายออก', join: 'เข้ามาแทน', together: "ทำงานคู่กัน 4 สัปดาห์",
       steps: [['ก่อน', `Change Job ของพลอย ติ๊ก <code>${OV}</code>`], ['จากนั้น', 'รอให้อนุมัติครบทุกขั้น'], ['สุดท้าย', `น้ำเข้ามา เลือกตำแหน่งจาก <code>${FP}</code>`]],
       oops: '<b>เจอ Error เรื่องวันที่?</b> อย่า Rescind เอง ติดต่อ HRIS แล้วเราช่วยกันแก้',
       alwaysH: 'ทำทุกครั้ง ทุกการย้าย', alwaysL: '3 เรื่องเล็กที่ช่วยลดการแก้ไขทีหลังได้มาก',
-      rules: [['Branch SSF ครบ', 'ไม่แน่ใจ? ถาม HR Partner'], ['ทีมใหม่ต้องมีอยู่แล้ว', 'ยังไม่มี? ให้ HRIS สร้างก่อน'], ['งานเดิม? Position เดิม', 'เปลี่ยน Job Profile ไม่ใช่ Position']],
+      rules: [["Branch SSF ครบ", "ไม่แน่ใจ? ถาม HR Partner"], ["ทีมใหม่และตำแหน่งพร้อม", "ย้ายไปทีมอื่น? ต้องมีตำแหน่งว่างรองรับก่อนวันย้าย"], ["งานเดิม? Position เดิม", "เปลี่ยน Job Profile ไม่ใช่ Position"]],
       feelH: 'ทำให้การย้ายเป็นประสบการณ์ที่ดี', feelL: 'template เป็นเรื่องง่าย ช่วงเวลาเหล่านี้คือสิ่งที่เขาจะจำได้',
-      moments: [['1 สัปดาห์ก่อน', 'แจ้งวันที่ให้พนักงาน แจ้ง Payroll, IT และ Admin'], ['วันย้าย', 'Workday เปลี่ยนให้อัตโนมัติ สิทธิ์และโต๊ะทำงานพร้อม'], ['สัปดาห์แรก', 'เช็กโปรไฟล์ การอนุมัติ และเงินเดือน ถามไถ่ว่าเป็นอย่างไร']],
+      moments: [["2–4 สัปดาห์ก่อน", "HR Partner แจ้ง IT, Admin และทีม SAP เพื่อให้ทุกอย่างพร้อมทันเวลา"], ["2 สัปดาห์ก่อน", "เริ่ม Change Job ใน Workday ยืนยันวันที่กับพนักงานและ Payroll"], ["วันย้าย", "Workday เปลี่ยนให้อัตโนมัติ อุปกรณ์ สิทธิ์การเข้าถึง และโต๊ะทำงานพร้อม"], ["สัปดาห์แรก", "เช็กโปรไฟล์ การอนุมัติ และเงินเดือน ถามไถ่ว่าเป็นอย่างไร"]], teamNote: "<b>HR Partner โปรดทราบ:</b> แจ้ง IT, Admin และทีม SAP ล่วงหน้า 2–4 สัปดาห์ก่อนวันย้าย ตามสิ่งที่ต้องเตรียม เช่น คอมพิวเตอร์ อีเมลและสิทธิ์เข้าระบบ สิทธิ์ SAP โต๊ะทำงาน บัตรเข้าออก ที่จอดรถ ตอนนี้ Workday ยังไม่แจ้งทีมเหล่านี้ให้อัตโนมัติ",
       helpH: 'ต้องการความช่วยเหลือ?', helpL: 'วิดีโอสั้นๆ หรือคุยกับคนจริง', q: 'คำถามหรือ Error', team: 'ทีม HRIS',
       vid1T: 'วิดีโอ: Change Job ใน 1 นาที', vid1S: 'ใครทำอะไร และขั้นตอน', vidT: 'วิดีโอ: ส่งมอบงานด้วย job overlap', vidS: '4 นาที ทีละขั้น', artT: 'บทความ Workday Help', artS: 'ทีละขั้น พร้อมภาพ', open: 'เปิด' },
     vi: { watchSP: 'Xem trên SharePoint', deckDl: 'Tải bộ slide (PowerPoint)', soon: 'Video sắp có', sopT: 'SOP: Change Job', sopS: 'Ai làm gì, mốc thời gian, mẫu và danh sách kiểm tra', sop2T: 'SOP: Bàn giao với job overlap', sop2S: 'Đầy đủ các bước bàn giao', name: 'VI', h1a: 'Có người sắp chuyển?', h1b: 'Cùng làm cho suôn sẻ', pill: 'Chọn loại thay đổi. Nhận đúng mẫu và 3 điều cần kiểm tra.',
@@ -413,15 +415,15 @@ if (typeof module !== 'undefined') module.exports = KIT;
       lines: ['Vai trò lớn hơn, grade mới.', 'Quản lý hoặc nhóm mới.', 'Địa điểm hoặc thành phố mới.', 'Chức danh mới, cùng vị trí.', 'Người mới tiếp quản.'],
       boarding: 'Thẻ lên máy bay', today: 'Hiện tại', next: 'Tiếp theo', useTpl: 'Dùng mẫu này', beforeSubmit: 'Trước khi Submit', sample: 'Tên và chức danh là ví dụ.',
       subs: ['Phê duyệt ngoài Workday trước.', 'Quản lý hoặc nhóm mới. Lương giữ nguyên.', 'Có đổi lương? Dùng "with Compensation Change". Nếu không, dùng "No Change in Compensation".', 'Chức danh hoặc grade mới. Cùng vị trí, cùng lương.', 'Người mới bắt đầu trước khi người cũ rời đi.'],
-      checks: [['Đã phê duyệt ngoài Workday', 'Job Profile và grade mới', 'Chuẩn bị thay đổi lương'], ['Quản lý mới đã có nhóm', 'Lương giữ nguyên', 'Cost Center và Branch SSF'], ['Đúng mẫu theo lương', 'Cost Center và Branch SSF', 'Báo Admin: bàn, thẻ, chỗ đỗ xe'], ['Job Profile mới', 'Lương giữ nguyên', 'Giữ nguyên Position, không đổi'], ['Làm cho người rời đi trước', `Đánh dấu "${OV}"`, 'Không đóng vị trí của họ']],
+      checks: [["Đã phê duyệt ngoài Workday", "Job Profile và grade mới", "Chuẩn bị thay đổi lương"], ["Có vị trí trống trong nhóm mới", "Lương giữ nguyên", "Cost Center và Branch SSF"], ["Đúng mẫu theo lương", "Cost Center và Branch SSF", "Báo Admin: bàn, thẻ, chỗ đỗ xe"], ["Job Profile mới", "Lương giữ nguyên", "Giữ nguyên Position, không đổi"], ["Làm cho người rời đi trước", "Đánh dấu \"Is this position available for overlap?\"", "Không đóng vị trí của họ"]],
       tip: 'Bàn giao? Làm cho người rời đi trước và đánh dấu overlap.', cta: 'Xem video 1 phút →',
-      hoH: 'Bàn giao, làm việc song song', hoL: 'Người mới bắt đầu sớm để học việc từ người sắp rời đi.', leave: 'sắp rời đi', join: 'tiếp nhận', together: 'vài tuần làm cùng nhau',
+      hoH: 'Bàn giao, làm việc song song', hoL: "Người mới bắt đầu sớm khoảng 4 tuần để học việc từ người sắp rời đi. Bắt đầu khoảng 6 tuần trước ngày chuyển.", leave: 'sắp rời đi', join: 'tiếp nhận', together: "4 tuần làm cùng nhau",
       steps: [['Trước', `Change Job của Ploy. Đánh dấu <code>${OV}</code>`], ['Sau đó', 'Chờ đến khi mọi phê duyệt hoàn tất.'], ['Cuối cùng', `Nam vào. Chọn vị trí từ <code>${FP}</code>`]],
       oops: '<b>Lỗi ngày?</b> Đừng tự Rescind. Liên hệ HRIS, chúng ta cùng xử lý.',
       alwaysH: 'Mọi lần chuyển, luôn luôn', alwaysL: 'Ba điều nhỏ giúp tránh phải sửa nhiều về sau.',
-      rules: [['Điền Branch SSF', 'Không chắc? Hỏi HR Partner.'], ['Nhóm mới đã tồn tại', 'Chưa có? HRIS tạo trước.'], ['Cùng vai trò? Cùng Position', 'Đổi Job Profile, không đổi Position.']],
+      rules: [["Điền Branch SSF", "Không chắc? Hỏi HR Partner."], ["Nhóm mới và vị trí sẵn sàng", "Chuyển sang nhóm khác? Cần có vị trí trống cho họ trước ngày chuyển."], ["Cùng vai trò? Cùng Position", "Đổi Job Profile, không đổi Position."]],
       feelH: 'Để việc chuyển thật dễ chịu', feelL: 'Chọn mẫu là phần dễ. Những khoảnh khắc này mới là điều họ nhớ.',
-      moments: [['Một tuần trước', 'Báo ngày cho nhân viên. Báo Payroll, IT và Admin.'], ['Ngày chuyển', 'Workday tự chuyển đổi. Quyền truy cập và chỗ ngồi sẵn sàng.'], ['Tuần đầu', 'Kiểm tra hồ sơ, phê duyệt và lương. Hỏi thăm họ.']],
+      moments: [["2–4 tuần trước", "HR Partner báo IT, Admin và đội SAP để mọi thứ sẵn sàng kịp lúc."], ["2 tuần trước", "Bắt đầu Change Job trong Workday. Xác nhận ngày với nhân viên và Payroll."], ["Ngày chuyển", "Workday tự động chuyển đổi. Thiết bị, quyền truy cập và chỗ ngồi đã sẵn sàng."], ["Tuần đầu", "Kiểm tra hồ sơ, phê duyệt và lương. Hỏi thăm họ."]], teamNote: "<b>Lưu ý cho HR Partner:</b> báo IT, Admin và đội SAP trước ngày chuyển 2–4 tuần, tùy nhu cầu: máy tính, email và quyền truy cập hệ thống, quyền SAP, chỗ ngồi, thẻ ra vào, chỗ đỗ xe. Hiện Workday chưa tự động báo cho các đội này.",
       helpH: 'Cần trợ giúp?', helpL: 'Video ngắn, hoặc một người thật.', q: 'Câu hỏi hoặc lỗi', team: 'Đội HRIS',
       vid1T: 'Video: Change Job trong 1 phút', vid1S: 'Ai làm gì, và quy trình', vidT: 'Video: Bàn giao với job overlap', vidS: '4 phút, từng bước', artT: 'Bài viết Workday Help', artS: 'Từng bước, có hình', open: 'Mở' },
     zh: { watchSP: '在 SharePoint 观看', deckDl: '下载演示文稿（PowerPoint）', soon: '视频即将上线', sopT: 'SOP：Change Job', sopS: '分工、时间线、模板和检查清单', sop2T: 'SOP：job overlap 交接', sop2S: '交接的完整步骤', name: '中文', h1a: '有人要调动？', h1b: '让一切顺顺利利', pill: '选择调动类型，获取正确模板和三项检查。',
@@ -429,15 +431,15 @@ if (typeof module !== 'undefined') module.exports = KIT;
       lines: ['更大的角色，新职级。', '新经理或新团队。', '新工作地点或城市。', '新职称，岗位不变。', '由新人接手。'],
       boarding: '登机牌', today: '现在', next: '之后', useTpl: '使用此模板', beforeSubmit: '提交前', sample: '姓名和职位仅为示例。',
       subs: ['先在 Workday 外完成审批。', '新经理或新团队，薪酬不变。', '薪酬有变？用 "with Compensation Change"；没有则用 "No Change in Compensation"。', '新职称或职级，同一岗位，薪酬不变。', '接任者在原员工离开前到岗。'],
-      checks: [['已在 Workday 外审批', '新的 Job Profile 和职级', '薪酬调整已准备好'], ['新经理已有团队', '薪酬不变', 'Cost Center 和 Branch SSF'], ['按薪酬选对模板', 'Cost Center 和 Branch SSF', '通知 Admin：座位、卡、停车位'], ['新的 Job Profile', '薪酬不变', '岗位不变：不要更改 Position'], ['先处理离任者', `勾选 "${OV}"`, '不要关闭其岗位']],
+      checks: [["已在 Workday 外审批", "新的 Job Profile 和职级", "薪酬调整已准备好"], ["新团队有空缺岗位", "薪酬不变", "Cost Center 和 Branch SSF"], ["按薪酬选对模板", "Cost Center 和 Branch SSF", "通知 Admin：座位、卡、停车位"], ["新的 Job Profile", "薪酬不变", "岗位不变：不要更改 Position"], ["先处理离任者", "勾选 \"Is this position available for overlap?\"", "不要关闭其岗位"]],
       tip: '交接？先处理离任者，并勾选 overlap。', cta: '观看 1 分钟视频 →',
-      hoH: '交接：并肩工作', hoL: '接任者提前到岗，向即将离任的人学习工作。', leave: '即将离任', join: '接任', together: '共同工作几周',
+      hoH: '交接：并肩工作', hoL: "接任者提前约 4 周到岗，向即将离任的人学习工作。请在调动日前约 6 周开始办理。", leave: '即将离任', join: '接任', together: "共同工作 4 周",
       steps: [['首先', `Ploy 的 Change Job，勾选 <code>${OV}</code>`], ['然后', '等待所有审批完成。'], ['最后', `Nam 加入，从 <code>${FP}</code> 中选择岗位`]],
       oops: '<b>日期报错？</b>不要自行 Rescind，联系 HRIS，我们一起解决。',
       alwaysH: '每次调动，都要做到', alwaysL: '三件小事，省去后续大量修正。',
-      rules: [['填写 Branch SSF', '不确定？问 HR Partner。'], ['新团队已存在', '还没有？请 HRIS 先创建。'], ['岗位不变？Position 不变', '改 Job Profile，不改 Position。']],
+      rules: [["填写 Branch SSF", "不确定？问 HR Partner。"], ["新团队和岗位已就绪", "调到其他团队？调动日前需有空缺岗位。"], ["岗位不变？Position 不变", "改 Job Profile，不改 Position。"]],
       feelH: '让调动体验更好', feelL: '选模板很简单，这些时刻才是他们会记住的。',
-      moments: [['提前一周', '告知员工日期，通知 Payroll、IT 和 Admin。'], ['调动当天', 'Workday 自动生效，权限和座位已就绪。'], ['第一周', '检查档案、审批和薪资，问问他们感觉如何。']],
+      moments: [["提前 2–4 周", "HR Partner 通知 IT、Admin 和 SAP 团队，确保一切按时就绪。"], ["提前 2 周", "在 Workday 发起 Change Job，与员工和 Payroll 确认日期。"], ["调动当天", "Workday 自动切换，设备、权限和座位已就绪。"], ["第一周", "检查档案、审批和薪资，问问他们感觉如何。"]], teamNote: "<b>HR Partner 请注意：</b>根据需要，在调动日前 2–4 周通知 IT、Admin 和 SAP 团队：电脑、邮箱和系统权限、SAP 角色、座位、门禁卡、停车位。目前 Workday 还不会自动通知这些团队。",
       helpH: '需要帮助？', helpL: '简短视频，或直接找人。', q: '疑问或报错', team: 'HRIS 团队',
       vid1T: '视频：1 分钟了解 Change Job', vid1S: '谁做什么，以及流程', vidT: '视频：job overlap 交接', vidS: '4 分钟，分步讲解', artT: 'Workday Help 文章', artS: '分步说明，附图片', open: '打开' },
     km: { watchSP: 'មើលនៅលើ SharePoint', deckDl: 'ទាញយកស្លាយ (PowerPoint)', soon: 'វីដេអូនឹងមកដល់ឆាប់ៗ', sopT: 'SOP៖ Change Job', sopS: 'អ្នកណាធ្វើអ្វី ពេលវេលា គំរូ និងបញ្ជីត្រួតពិនិត្យ', sop2T: 'SOP៖ ការប្រគល់ការងារជាមួយ job overlap', sop2S: 'ជំហានពេញលេញនៃការប្រគល់ការងារ', name: 'ខ្មែរ', h1a: 'មាននរណាម្នាក់កំពុងផ្លាស់ប្តូរ?', h1b: 'តោះធ្វើឱ្យវារលូន', pill: 'ជ្រើសប្រភេទការផ្លាស់ប្តូរ។ ទទួលបានគំរូត្រឹមត្រូវ និងចំណុចបីត្រូវពិនិត្យ។',
@@ -445,15 +447,15 @@ if (typeof module !== 'undefined') module.exports = KIT;
       lines: ['តួនាទីធំជាងមុន grade ថ្មី។', 'អ្នកគ្រប់គ្រង ឬក្រុមថ្មី។', 'ទីតាំង ឬទីក្រុងថ្មី។', 'មុខងារថ្មី មុខតំណែងដដែល។', 'មានអ្នកថ្មីទទួលបន្ត។'],
       boarding: 'សំបុត្រឡើងយន្តហោះ', today: 'បច្ចុប្បន្ន', next: 'បន្ទាប់', useTpl: 'ប្រើគំរូនេះ', beforeSubmit: 'មុនពេល Submit', sample: 'ឈ្មោះ និងតួនាទីគឺជាឧទាហរណ៍។',
       subs: ['អនុម័តនៅក្រៅ Workday ជាមុនសិន។', 'អ្នកគ្រប់គ្រង ឬក្រុមថ្មី។ ប្រាក់បៀវត្សដដែល។', 'ប្រាក់បៀវត្សផ្លាស់ប្តូរ? ប្រើ "with Compensation Change"។ បើមិនមាន ប្រើ "No Change in Compensation"។', 'មុខងារ ឬ grade ថ្មី។ មុខតំណែងដដែល ប្រាក់បៀវត្សដដែល។', 'អ្នកថ្មីចាប់ផ្តើមមុនពេលអ្នកចាស់ចាកចេញ។'],
-      checks: [['បានអនុម័តនៅក្រៅ Workday', 'Job Profile និង grade ថ្មី', 'ការកែប្រែប្រាក់បៀវត្សរួចរាល់'], ['អ្នកគ្រប់គ្រងថ្មីមានក្រុមរួចហើយ', 'ប្រាក់បៀវត្សដដែល', 'Cost Center និង Branch SSF'], ['គំរូត្រឹមត្រូវតាមប្រាក់បៀវត្ស', 'Cost Center និង Branch SSF', 'ជូនដំណឹង Admin៖ តុ កាត ចំណតរថយន្ត'], ['Job Profile ថ្មី', 'ប្រាក់បៀវត្សដដែល', 'Position ដដែល៖ កុំផ្លាស់ប្តូរ'], ['ធ្វើសម្រាប់អ្នកចាកចេញមុន', `ធីក "${OV}"`, 'កុំបិទមុខតំណែងរបស់ពួកគេ']],
+      checks: [["បានអនុម័តនៅក្រៅ Workday", "Job Profile និង grade ថ្មី", "ការកែប្រែប្រាក់បៀវត្សរួចរាល់"], ["មានមុខតំណែងទំនេរក្នុងក្រុមថ្មី", "ប្រាក់បៀវត្សដដែល", "Cost Center និង Branch SSF"], ["គំរូត្រឹមត្រូវតាមប្រាក់បៀវត្ស", "Cost Center និង Branch SSF", "ជូនដំណឹង Admin៖ តុ កាត ចំណតរថយន្ត"], ["Job Profile ថ្មី", "ប្រាក់បៀវត្សដដែល", "Position ដដែល៖ កុំផ្លាស់ប្តូរ"], ["ធ្វើសម្រាប់អ្នកចាកចេញមុន", "ធីក \"Is this position available for overlap?\"", "កុំបិទមុខតំណែងរបស់ពួកគេ"]],
       tip: 'ការប្រគល់ការងារ? ធ្វើសម្រាប់អ្នកចាកចេញមុន ហើយធីក overlap។', cta: 'មើលវីដេអូ 1 នាទី →',
-      hoH: 'ការប្រគល់ការងារ ធ្វើការជាមួយគ្នា', hoL: 'អ្នកថ្មីចាប់ផ្តើមមុន ដើម្បីរៀនការងារពីអ្នកដែលកំពុងចាកចេញ។', leave: 'កំពុងចាកចេញ', join: 'ចូលជំនួស', together: 'ធ្វើការជាមួយគ្នាពីរបីសប្តាហ៍',
+      hoH: 'ការប្រគល់ការងារ ធ្វើការជាមួយគ្នា', hoL: "អ្នកថ្មីចាប់ផ្តើមមុនប្រហែល 4 សប្តាហ៍ ដើម្បីរៀនការងារពីអ្នកដែលកំពុងចាកចេញ។ ចាប់ផ្តើមប្រហែល 6 សប្តាហ៍មុនថ្ងៃផ្លាស់ប្តូរ។", leave: 'កំពុងចាកចេញ', join: 'ចូលជំនួស', together: "ធ្វើការជាមួយគ្នា 4 សប្តាហ៍",
       steps: [['ដំបូង', `Change Job របស់ Ploy។ ធីក <code>${OV}</code>`], ['បន្ទាប់', 'រង់ចាំរហូតដល់ការអនុម័តទាំងអស់បញ្ចប់។'], ['ចុងក្រោយ', `Nam ចូល។ ជ្រើសមុខតំណែងពី <code>${FP}</code>`]],
       oops: '<b>កំហុសកាលបរិច្ឆេទ?</b> កុំ Rescind ដោយខ្លួនឯង។ ទាក់ទង HRIS យើងនឹងដោះស្រាយជាមួយគ្នា។',
       alwaysH: 'រាល់ការផ្លាស់ប្តូរ រាល់ពេល', alwaysL: 'រឿងតូចៗបីដែលជួយសន្សំការកែតម្រូវច្រើននៅពេលក្រោយ។',
-      rules: [['បំពេញ Branch SSF', 'មិនប្រាកដ? សួរ HR Partner។'], ['ក្រុមថ្មីមានរួចហើយ', 'មិនទាន់មាន? HRIS បង្កើតជាមុន។'], ['តួនាទីដដែល? Position ដដែល', 'ប្តូរ Job Profile មិនមែន Position ទេ។']],
+      rules: [["បំពេញ Branch SSF", "មិនប្រាកដ? សួរ HR Partner។"], ["ក្រុមថ្មី និងមុខតំណែងរួចរាល់", "ផ្លាស់ទៅក្រុមផ្សេង? ត្រូវមានមុខតំណែងទំនេរសម្រាប់ពួកគេមុនថ្ងៃផ្លាស់ប្តូរ។"], ["តួនាទីដដែល? Position ដដែល", "ប្តូរ Job Profile មិនមែន Position ទេ។"]],
       feelH: 'ធ្វើឱ្យការផ្លាស់ប្តូរមានអារម្មណ៍ល្អ', feelL: 'ការជ្រើសគំរូគឺងាយស្រួល។ ពេលវេលាទាំងនេះជាអ្វីដែលពួកគេនឹងចងចាំ។',
-      moments: [['មួយសប្តាហ៍មុន', 'ប្រាប់ពួកគេពីកាលបរិច្ឆេទ។ ជូនដំណឹង Payroll, IT និង Admin។'], ['ថ្ងៃផ្លាស់ប្តូរ', 'Workday ប្តូរដោយស្វ័យប្រវត្តិ។ សិទ្ធិចូលប្រើ និងតុការងាររួចរាល់។'], ['សប្តាហ៍ដំបូង', 'ពិនិត្យប្រវត្តិរូប ការអនុម័ត និងប្រាក់បៀវត្ស។ សួរសុខទុក្ខពួកគេ។']],
+      moments: [["2–4 សប្តាហ៍មុន", "HR Partner ជូនដំណឹង IT, Admin និងក្រុម SAP ដើម្បីឱ្យអ្វីៗរួចរាល់ទាន់ពេល។"], ["2 សប្តាហ៍មុន", "ចាប់ផ្តើម Change Job ក្នុង Workday។ បញ្ជាក់កាលបរិច្ឆេទជាមួយបុគ្គលិក និង Payroll។"], ["ថ្ងៃផ្លាស់ប្តូរ", "Workday ប្តូរដោយស្វ័យប្រវត្តិ។ ឧបករណ៍ សិទ្ធិចូលប្រើ និងតុការងាររួចរាល់។"], ["សប្តាហ៍ដំបូង", "ពិនិត្យប្រវត្តិរូប ការអនុម័ត និងប្រាក់បៀវត្ស។ សួរសុខទុក្ខពួកគេ។"]], teamNote: "<b>ចំណាំសម្រាប់ HR Partner៖</b> ជូនដំណឹង IT, Admin និងក្រុម SAP មុនថ្ងៃផ្លាស់ប្តូរ 2–4 សប្តាហ៍ តាមតម្រូវការ៖ កុំព្យូទ័រ អ៊ីមែល និងសិទ្ធិចូលប្រព័ន្ធ សិទ្ធិ SAP តុការងារ កាតចូល ចំណតរថយន្ត។ បច្ចុប្បន្ន Workday មិនទាន់ជូនដំណឹងក្រុមទាំងនេះដោយស្វ័យប្រវត្តិទេ។",
       helpH: 'ត្រូវការជំនួយ?', helpL: 'វីដេអូខ្លីៗ ឬមនុស្សពិត។', q: 'សំណួរ ឬកំហុស', team: 'ក្រុម HRIS',
       vid1T: 'វីដេអូ៖ Change Job ក្នុង 1 នាទី', vid1S: 'អ្នកណាធ្វើអ្វី និងលំហូរការងារ', vidT: 'វីដេអូ៖ ការប្រគល់ការងារជាមួយ job overlap', vidS: '4 នាទី មួយជំហានម្តងៗ', artT: 'អត្ថបទ Workday Help', artS: 'មួយជំហានម្តងៗ មានរូបភាព', open: 'បើក' }
   };
@@ -495,6 +497,7 @@ if (typeof module !== 'undefined') module.exports = KIT;
     $('duo').innerHTML = [[PEOPLE[4][0], 'Ploy', t.leave], [{ hairStyle: 'swoop', skin: 1, shirt: '#9CC3F0', shirtD: '#7FA9E0', mouth: 'open' }, 'Nam', t.join]].map(d => `<figure>${KIT.person(d[0])}<figcaption>${esc(d[1])}<small>${esc(d[2])}</small></figcaption></figure>`).join('');
     $('steps').innerHTML = t.steps.map((s, i) => `<div class="step"><span class="num">${pad(i + 1)}</span><div><span class="lab">${esc(s[0])}</span><p>${s[1]}</p></div></div>`).join('');
     $('always').innerHTML = t.rules.map((r, i) => `<div class="tile"><span class="chead"><span class="num">${pad(i + 1)}</span><span class="lab">${esc(r[0])}</span></span><p>${esc(r[1])}</p>${art(RULEP[i][0], RULEP[i][1])}</div>`).join('');
+    $('teamNote').innerHTML = `${KIT.bubble('bulb')}<span>${t.teamNote}</span>`;
     $('moments').innerHTML = t.moments.map((m, i) => `<div class="tile"><span class="chead"><span class="num">${pad(i + 1)}</span><span class="lab">${esc(m[0])}</span></span><p>${esc(m[1])}</p>${art(MOMP[i][0], MOMP[i][1])}</div>`).join('');
     for (const [id, key] of [['v1', 'oneMinute'], ['v2', 'handover']]) {
       const a = $(id), set = (typeof VIDEOS !== 'undefined' && VIDEOS[key]) || {}, url = clean(set[lang]) || clean(set.en), pic = (POSTERS[key] || {})[lang] || '';
